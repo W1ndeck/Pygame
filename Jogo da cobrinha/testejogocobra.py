@@ -119,9 +119,9 @@ while True:
     if xsnake < 0:
         xsnake = larg
     if ysnake < 0:
-        xsnake = alt
+        ysnake = alt
     if ysnake > alt:
-        xsnake = 0
+        ysnake = 0
 
     if lista_cobra.count(lista_cabeca) > 1:
         mensagem2 = "Game over!! Pressione R para jogar novamente"
