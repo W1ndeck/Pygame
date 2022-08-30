@@ -10,6 +10,9 @@ largura_janela = 640
 altura_janela = 480
 
 
+miar = pygame.mixer.Sound("sons/Meow.ogg")
+ronronar = pygame.mixer.Sound("sons/cat_mewpurr.wav")
+
 tela_jogo = pygame.display.set_mode((largura_janela, altura_janela))
 pygame.display.set_caption("Sprites")
 relogio_jogo = pygame.time.Clock()
@@ -40,7 +43,8 @@ class Gato(pygame.sprite.Sprite):
 
         # transformando num quadrado e dizendo onde quero a imagem
         self.rect = self.image.get_rect()
-        self.rect.topleft = 300, 330
+        self.posicao = 300
+        self.rect.topleft = self.posicao, 330
 
         self.andadireita = False
         self.andaesquerda = False
@@ -50,6 +54,9 @@ class Gato(pygame.sprite.Sprite):
         if self.andaesquerda == True:
             # self.atual = 0
             self.atual += 0.15
+            self.posicao -= 2
+            self.rect.topleft = self.posicao, 330
+            
             if self.atual >= (len(self.sprites)/2):
                 self.atual = 0
                 self.andaesquerda = False
@@ -58,6 +65,8 @@ class Gato(pygame.sprite.Sprite):
             if self.atual < 6: #RECEBAAAAA ESSA GAMBIARRA NO SEU PEITÃO!!!!
                 self.atual += 6 - self.atual
             self.atual += 0.15
+            self.posicao += 2
+            self.rect.topleft = self.posicao, 330
             if self.atual >= len(self.sprites):
                 self.atual = 6
                 self.andadireita = False
@@ -99,6 +108,13 @@ while True:
             gato.andardireita()
         if pygame.key.get_pressed()[K_a]:
             gato.andaresquerda()
+
+        if pygame.key.get_pressed()[K_e]:
+            ronronar.play()
+
+        if event.type == KEYDOWN:
+            if event.key == K_q:
+                miar.play()
 
     tela_jogo.blit(imagem_fundo, (0, 0))
     todas_as_sprites.draw(tela_jogo)
