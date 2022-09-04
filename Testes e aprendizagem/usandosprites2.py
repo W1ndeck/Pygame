@@ -43,30 +43,31 @@ class Gato(pygame.sprite.Sprite):
 
         # transformando num quadrado e dizendo onde quero a imagem
         self.rect = self.image.get_rect()
-        self.posicao = 300
-        self.rect.topleft = self.posicao, 330
+        self.x = 300
+        self.y = 330
+        self.rect.topleft = self.x, self.y
 
         self.andadireita = False
         self.andaesquerda = False
 
     def update(self):
-        
+
         if self.andaesquerda == True:
             # self.atual = 0
             self.atual += 0.15
-            self.posicao -= 2
-            self.rect.topleft = self.posicao, 330
-            
+            self.x -= 2
+            self.rect.topleft = self.x, self.y
+
             if self.atual >= (len(self.sprites)/2):
                 self.atual = 0
                 self.andaesquerda = False
 
         elif self.andadireita == True:
-            if self.atual < 6: #RECEBAAAAA ESSA GAMBIARRA NO SEU PEITÃO!!!!
+            if self.atual < 6:  # RECEBAAAAA ESSA GAMBIARRA NO SEU PEITÃO!!!!
                 self.atual += 6 - self.atual
             self.atual += 0.15
-            self.posicao += 2
-            self.rect.topleft = self.posicao, 330
+            self.x += 2
+            self.rect.topleft = self.x, self.y
             if self.atual >= len(self.sprites):
                 self.atual = 6
                 self.andadireita = False
@@ -115,6 +116,12 @@ while True:
         if event.type == KEYDOWN:
             if event.key == K_q:
                 miar.play()
+
+    if gato.rect.x > largura_janela - 120:
+        gato.rect.x = largura_janela - 120
+
+    if gato.rect.x < 0:
+        gato.rect.x = 0
 
     tela_jogo.blit(imagem_fundo, (0, 0))
     todas_as_sprites.draw(tela_jogo)
