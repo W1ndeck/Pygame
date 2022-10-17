@@ -28,7 +28,7 @@ pontos = 0
 
 morreu = False
 
-fonte = pygame.font.SysFont("Arial", 40, True, True)
+fonte = pygame.font.SysFont("Arial", 40, True, False)
 
 tela = pygame.display.set_mode((larg, alt))
 pygame.display.set_caption("Joguinho Python")
@@ -124,7 +124,7 @@ while True:
         ysnake = 0
 
     if lista_cobra.count(lista_cabeca) > 1:
-        mensagem2 = "Game over!! Pressione R para jogar novamente"
+        mensagem2 = "Game over!! Pressione R para   jogar novamente"
         fonte2 = pygame.font.SysFont("Arial", 20, True, True)
         texto_formatado2 = fonte2.render(mensagem2, True, (255, 255, 255))
         ret_text = texto_formatado2.get_rect()
